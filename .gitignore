@@ -1,0 +1,54 @@
+# 🔐 Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 📦 Node modules
+node_modules/
+
+# 🔥 Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🧪 Test coverage
+coverage/
+
+# 🗂️ Build files
+dist/
+build/
+
+# 🧠 OS files
+.DS_Store
+Thumbs.db
+
+# 🧾 IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# 📂 Temporary files
+tmp/
+temp/
+
+# 🚫 MongoDB local data (if any)
+data/
+*.db
+
+# 🔑 Secrets
+*.pem
+*.key
+
+# 🧾 Debug files
+*.out
+*.pid
+
+# 🚀 Optional: uploads (if you store files)
+uploads/
+
+# 🧹 Cache
+.cache/

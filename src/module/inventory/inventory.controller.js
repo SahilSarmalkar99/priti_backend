@@ -222,33 +222,32 @@ async function deleteProduct(req, res) {
 async function updateProduct(req, res) {
   try {
     const { id } = req.params;
-    const { name, category, price, supplier, stock, minStock } = req.body;
 
-    // ✅ Validate ID
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         message: "Invalid product ID",
       });
     }
 
-    // ✅ Check product exists
-    const product = await ProductModel.findById(id);
+    // 🔥 Remove empty fields (important)
+    const updateData = {};
+    Object.keys(req.body).forEach((key) => {
+      if (req.body[key] !== "" && req.body[key] !== null) {
+        updateData[key] = req.body[key];
+      }
+    });
+
+    const product = await ProductModel.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true } // return updated doc
+    );
 
     if (!product) {
       return res.status(404).json({
         message: "Product not found",
       });
     }
-
-    // ✅ Update fields (only if provided)
-    if (name) product.name = name;
-    if (category) product.category = category;
-    if (price !== undefined) product.price = price;
-    if (supplier) product.supplier = supplier;
-    if (stock !== undefined) product.stock = stock;
-    if (minStock !== undefined) product.minStock = minStock;
-
-    await product.save();
 
     res.json({
       message: "Product updated successfully",
